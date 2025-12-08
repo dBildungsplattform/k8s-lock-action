@@ -10,7 +10,9 @@ function init_k8s() {
 }
 
 function get_lock_name() {
-    echo "k8s-lock-${GITHUB_REPOSITORY/\//-}-${INPUT_LOCK_NAME}"
+    local repo="${GITHUB_REPOSITORY/\//-}"
+    repo=$(echo "$repo" | tr '[:upper:]' '[:lower:]')
+    echo "k8s-lock-${repo}-${INPUT_LOCK_NAME}"
 }
 
 # Can exit. Invoke directly, not from a subshell.
